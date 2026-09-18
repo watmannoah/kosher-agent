@@ -41,7 +41,10 @@
       "Bash(curl -s -x http://srt.dG9vbHVfMDFZR0JaWTd5ZUJIeEtRdjdZVGlFNWky:0caf33fe22c0cc7d319438b3c42909ab@localhost:63695 -o /dev/null -w 'status %{http_code}\\\\n' --max-time 25 https://api.anthropic.com/v1/models -H 'anthropic-version: 2023-06-01' -H 'x-api-key: invalid')",
       "Bash(curl -s -o /dev/null -w \"status %{http_code}\\\\n\" --max-time 25 https://registry.npmjs.org/next)",
       "Bash(curl -s -o /dev/null -w \"status %{http_code}\\\\n\" --max-time 25 https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\" -H \"x-api-key: invalid\")",
-      "Bash(curl -sv --max-time 25 https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\")"
+      "Bash(curl -sv --max-time 25 https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\")",
+      "Bash(security find-internet-password *)",
+      "Read(//Applications/**)",
+      "Read(//Applications/Visual Studio Code.app/**)"
     ]
   }
 }

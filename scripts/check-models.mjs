@@ -54,7 +54,10 @@ function bodyFor(tier) {
 
 let failed = false;
 
-for (const tier of Object.keys(config.models)) {
+// Keys beginning with $ are documentation, not model tiers.
+const tiers = Object.keys(config.models).filter((k) => !k.startsWith('$'));
+
+for (const tier of tiers) {
   const body = bodyFor(tier);
   const shape = Object.keys(body)
     .filter((k) => k !== 'messages')
