@@ -213,3 +213,4 @@ src/components/            The panels
 Swapping the vertical means replacing `config/` and `data/`. The tool
 implementations are domain-specific; the pipeline, verifier, guardrail engine,
 normaliser, eval harness and UI are not.
+
