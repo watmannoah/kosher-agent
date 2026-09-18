@@ -44,3 +44,9 @@ export function isAllStopwords(phrase: string): boolean {
   if (words.length === 0) return true;
   return words.every((w) => STOPWORDS.has(w));
 }
+
+/** True when the phrase's first word is a stopword. */
+export function startsWithStopword(phrase: string): boolean {
+  const first = phrase.toLowerCase().trim().split(/\s+/)[0];
+  return Boolean(first) && STOPWORDS.has(first);
+}

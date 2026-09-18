@@ -121,6 +121,19 @@ describe('normalise — in real sentences', () => {
     expect(r.substitutions).toHaveLength(0);
   });
 
+  it('does not swallow a leading article', () => {
+    // "a heck share" reduces to the same consonant skeleton as "hechsher"
+    // (both KSR), so the whole three-word span used to be replaced and the
+    // article vanished. Inexact matching now skips spans starting with a
+    // stopword; exact matching still allows them.
+    expect(n('i need a heck share')).toBe('i need a hechsher');
+    expect(n('do they have a heck share')).toBe('do they have a hechsher');
+  });
+
+  it('still matches listed variants that legitimately begin with a stopword', () => {
+    expect(n('is the sabbath a problem')).toBe('is Shabbos a problem');
+  });
+
   it('preserves capitalisation style', () => {
     expect(n('Hash gotcha')).toBe('Hashgacha');
   });

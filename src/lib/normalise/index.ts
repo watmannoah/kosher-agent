@@ -16,7 +16,7 @@
 import { MAX_PHRASE_WORDS, TERMS, VARIANT_INDEX, type TermEntry, type TermKind } from './dictionary';
 import { editDistance, letterMask, phoneticKey, popcount, similarity } from './phonetic';
 import { BRAND_INDEX } from './brands';
-import { isAllStopwords } from './stopwords';
+import { isAllStopwords, startsWithStopword } from './stopwords';
 
 export interface Substitution {
   /** Exactly as it appeared in the raw input. */
@@ -169,6 +169,14 @@ function lookupPhrase(phrase: string): MatchHit | null {
   const exact = VARIANT_INDEX.get(phrase);
   if (exact) {
     hit = { entry: exact, confidence: 1, method: 'exact' };
+  } else if (startsWithStopword(phrase)) {
+    // A span beginning with an English article or preposition is not a
+    // transliterated term, and matching it inexactly swallows the article:
+    // "a heck share" phonetically equals "hechsher" (both reduce to KSR), so
+    // the whole three-word span was being replaced and the "a" vanished.
+    // Exact hits are still allowed above, because some listed variants
+    // legitimately begin with a stopword ("the sabbath").
+    hit = null;
   } else if (!isAllStopwords(phrase)) {
     // Inexact matching is skipped for spans made entirely of English function
     // words. See stopwords.ts — this is what stops "is on" becoming "yoshon".

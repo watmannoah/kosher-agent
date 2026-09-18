@@ -13,7 +13,8 @@
     "evals": "RUN_EVALS=1 vitest run tests/evals.test.ts",
     "check:models": "node scripts/check-models.mjs",
     "trace": "node scripts/trace.mjs",
-    "capture": "node scripts/capture-sessions.mjs"
+    "capture": "node scripts/capture-sessions.mjs",
+    "build:demo": "node scripts/build-demo.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.127.0",
@@ -27,6 +28,7 @@
     "@types/node": "^24.13.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
