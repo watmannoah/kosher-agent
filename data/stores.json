@@ -1,0 +1,53 @@
+{
+  "_notice": "SYNTHETIC DEMONSTRATION DATA. Invented stores, invented inventory.",
+  "stores": [
+    {
+      "id": "s-001",
+      "name": "Kol Mazon Supermarket",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zips": ["11230", "11210", "11218"],
+      "stocks": ["p-001", "p-002", "p-004", "p-005", "p-006", "p-008", "p-009", "p-010", "p-012", "p-015", "p-016", "p-018", "p-020", "p-024", "p-025", "p-027", "p-030", "p-034", "p-038"]
+    },
+    {
+      "id": "s-002",
+      "name": "Shefa Grocery",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zips": ["11204", "11219"],
+      "stocks": ["p-001", "p-004", "p-008", "p-011", "p-015", "p-021", "p-022", "p-026", "p-028", "p-031", "p-032", "p-034", "p-036", "p-040"]
+    },
+    {
+      "id": "s-003",
+      "name": "Lakewood Kosher Market",
+      "city": "Lakewood",
+      "state": "NJ",
+      "zips": ["08701", "08721"],
+      "stocks": ["p-002", "p-004", "p-006", "p-009", "p-012", "p-013", "p-017", "p-019", "p-025", "p-027", "p-029", "p-033", "p-035", "p-039", "p-041"]
+    },
+    {
+      "id": "s-004",
+      "name": "Monsey Food Center",
+      "city": "Monsey",
+      "state": "NY",
+      "zips": ["10952", "10977"],
+      "stocks": ["p-001", "p-005", "p-007", "p-010", "p-016", "p-018", "p-019", "p-020", "p-021", "p-024", "p-030", "p-032", "p-038", "p-042"]
+    },
+    {
+      "id": "s-005",
+      "name": "Cedar Lane Kosher",
+      "city": "Teaneck",
+      "state": "NJ",
+      "zips": ["07666", "07601"],
+      "stocks": ["p-004", "p-008", "p-015", "p-022", "p-023", "p-025", "p-027", "p-028", "p-034", "p-036", "p-041", "p-042"]
+    },
+    {
+      "id": "s-006",
+      "name": "Five Towns Kosher Depot",
+      "city": "Lawrence",
+      "state": "NY",
+      "zips": ["11559", "11516", "11563"],
+      "stocks": ["p-001", "p-002", "p-006", "p-011", "p-013", "p-017", "p-021", "p-026", "p-029", "p-031", "p-033", "p-035", "p-039", "p-040"]
+    }
+  ]
+}

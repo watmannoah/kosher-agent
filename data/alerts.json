@@ -1,0 +1,75 @@
+{
+  "_notice": "SYNTHETIC DEMONSTRATION DATA. These alerts are invented for a software demonstration. No real product is affected.",
+  "_schema": {
+    "type": "recall | mislabelling | revoked | counterfeit_symbol | advisory",
+    "severity": "high | medium | low — high alerts must be surfaced unprompted on any related lookup"
+  },
+  "alerts": [
+    {
+      "id": "a-001",
+      "type": "recall",
+      "severity": "high",
+      "issued": "2026-09-08",
+      "productId": "p-020",
+      "establishmentId": null,
+      "headline": "Migdal Provisions Beef Hot Dogs — recall, specific lot codes",
+      "detail": "Lot codes beginning L26-24 through L26-27 were packed on a line that had not completed changeover from a non-certified run. Product bearing those lot codes is not covered by our certification.",
+      "action": "Consumers should not use product from the affected lots and may return it to the point of purchase. Product outside those lot codes is unaffected and remains certified."
+    },
+    {
+      "id": "a-002",
+      "type": "mislabelling",
+      "severity": "high",
+      "issued": "2026-09-02",
+      "productId": "p-030",
+      "establishmentId": null,
+      "headline": "Ramot Provisions Mayonnaise — printed with a dairy symbol in error",
+      "detail": "A packaging run carries the Kehilla-K-D symbol. The product is pareve and was produced on pareve equipment. The dairy designation is a printing error, not a formulation change.",
+      "action": "The product is pareve despite the symbol shown. Corrected packaging is in distribution. Callers who see the D symbol on this product should be told it is a labelling error."
+    },
+    {
+      "id": "a-003",
+      "type": "advisory",
+      "severity": "medium",
+      "issued": "2026-08-19",
+      "productId": "p-040",
+      "establishmentId": null,
+      "headline": "Zahav Chocolate-Covered Marshmallows — dairy equipment, frequently misread",
+      "detail": "The Kehilla-K-DE symbol denotes dairy equipment, not a dairy product. The item contains no dairy ingredients but is produced on dairy equipment.",
+      "action": "Advisory only. No action required. Issued because the hotline received repeated calls treating DE as pareve."
+    },
+    {
+      "id": "a-004",
+      "type": "advisory",
+      "severity": "low",
+      "issued": "2026-07-30",
+      "productId": "p-023",
+      "establishmentId": null,
+      "headline": "Tamar Valley Dried Apricots — infestation check advised",
+      "detail": "Routine inspection found occasional infestation in imported dried apricots across the category.",
+      "action": "Certification is unaffected. Consumers are advised to check the product. Questions about what checking is required are halachic and belong with a Rav."
+    },
+    {
+      "id": "a-005",
+      "type": "revoked",
+      "severity": "high",
+      "issued": "2026-06-15",
+      "productId": "p-037",
+      "establishmentId": null,
+      "headline": "Migdal Provisions Beef Bone Broth — certification withdrawn",
+      "detail": "Kehilla certification for this single product was withdrawn following a supplier change that was not submitted for approval. Other Migdal Provisions products are unaffected and remain certified.",
+      "action": "Product bearing our symbol from before this date is not currently under our certification. The symbol should no longer appear on new production. This concerns our certification only and is not a statement about the product's kashrus under any other supervision."
+    },
+    {
+      "id": "a-006",
+      "type": "counterfeit_symbol",
+      "severity": "high",
+      "issued": "2026-09-11",
+      "productId": null,
+      "establishmentId": "e-008",
+      "headline": "Kehilla symbol displayed at a second Shibolet Pizza location we do not certify",
+      "detail": "A second location trading as Shibolet Pizza on Central Avenue is displaying our certificate. Only the River Avenue location in Lakewood is under our hashgacha.",
+      "action": "Consumers should verify the address. The Central Avenue location is not certified by Kehilla. Reports of our symbol displayed without certification should be given to the hotline."
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "_notice": "SYNTHETIC DEMONSTRATION DATA. Every symbol and agency below is invented. No real certification body, symbol, or trade dress is represented here.",
+  "_policy": "verify_symbol identifies a symbol and nothing else. It returns no reliability field, no rating, and no acceptability judgement, by design — there is deliberately nothing in this data for an agent to leak on that question. See BRIEF 2d.",
+  "symbols": [
+    {
+      "id": "Kehilla-K",
+      "isOurs": true,
+      "mark": "K in a rounded square",
+      "name": "Kehilla-K",
+      "agency": "Kehilla Kosher Certification",
+      "meaning": "Certified pareve, or certified with no dairy or meat designation required.",
+      "descriptors": ["k in a square", "k in a box", "letter k", "rounded square k", "k with kehilla underneath", "boxed k", "square k"]
+    },
+    {
+      "id": "Kehilla-K-D",
+      "isOurs": true,
+      "mark": "K in a rounded square followed by D",
+      "name": "Kehilla-K-D",
+      "agency": "Kehilla Kosher Certification",
+      "meaning": "Certified dairy. Contains dairy ingredients.",
+      "descriptors": ["k in a square with a d", "k box then d", "k d", "k with a d next to it", "square k with d"]
+    },
+    {
+      "id": "Kehilla-K-DE",
+      "isOurs": true,
+      "mark": "K in a rounded square followed by DE",
+      "name": "Kehilla-K-DE",
+      "agency": "Kehilla Kosher Certification",
+      "meaning": "Certified dairy equipment — no dairy ingredients, produced on dairy equipment. Not the same as dairy, and not pareve.",
+      "descriptors": ["k in a square with de", "k d e", "k with de", "de after the k", "square k with de"]
+    },
+    {
+      "id": "Kehilla-K-Meat",
+      "isOurs": true,
+      "mark": "K in a rounded square followed by MEAT",
+      "name": "Kehilla-K-Meat",
+      "agency": "Kehilla Kosher Certification",
+      "meaning": "Certified meat.",
+      "descriptors": ["k in a square with meat", "k with the word meat", "k meat", "square k meat"]
+    },
+    {
+      "id": "Kehilla-K-P",
+      "isOurs": true,
+      "mark": "K in a rounded square followed by P",
+      "name": "Kehilla-K-P",
+      "agency": "Kehilla Kosher Certification",
+      "meaning": "Certified for Pesach for the year printed alongside. The P is a SEPARATE certification from year-round — its absence means the item is year-round only.",
+      "descriptors": ["k in a square with a p", "k with a p", "k p", "p next to the k", "square k with p"]
+    },
+    {
+      "id": "VHM",
+      "isOurs": false,
+      "mark": "VHM in an oval",
+      "name": "VHM",
+      "agency": "Vaad HaKashrus of Milbrook",
+      "meaning": "A certification symbol belonging to another agency. We can identify it; we do not speak to another agency's standards.",
+      "descriptors": ["vhm", "v h m", "three letters in an oval", "vhm oval", "letters in an oval"]
+    },
+    {
+      "id": "BDT",
+      "isOurs": false,
+      "mark": "Interlocked B and D inside a triangle",
+      "name": "BDT",
+      "agency": "Beis Din of Thornhill",
+      "meaning": "A certification symbol belonging to another agency. Identification only.",
+      "descriptors": ["b and d in a triangle", "triangle with letters", "bd triangle", "interlocked b d", "triangle hechsher"]
+    },
+    {
+      "id": "KVR",
+      "isOurs": false,
+      "mark": "Script K with a small crown",
+      "name": "KVR",
+      "agency": "Kashrus Va'ad of Riverdale",
+      "meaning": "A certification symbol belonging to another agency. Identification only.",
+      "descriptors": ["k with a crown", "crown over a k", "fancy k with a crown", "script k crown", "crowned k"]
+    },
+    {
+      "id": "plain-k",
+      "isOurs": false,
+      "mark": "A bare letter K with no surrounding mark",
+      "name": "Unqualified K",
+      "agency": null,
+      "meaning": "A bare K is not a certification symbol belonging to any agency we can identify. In the United States a plain letter K cannot be trademarked, so it does not identify a certifier. We cannot tell you who, if anyone, supervises a product bearing only a bare K — and what to do about that is a question for a Rav.",
+      "descriptors": ["just a k", "plain k", "bare k", "only a k", "a k on its own", "k with nothing around it", "single k no box"]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "_notice": "SYNTHETIC DEMONSTRATION DATA. Illustrative process and ranges for a fictional agency. Not a real fee schedule.",
+  "_policy": "Ranges here are deliberately WIDE and are returned as ranges with their drivers attached. There is no single-number field anywhere in this file, so an agent has nothing to quote from even if it tries. See BRIEF 2f.",
+  "process": {
+    "steps": [
+      "Application and product/ingredient questionnaire.",
+      "Ingredient and supplier review — every ingredient traced to its own certification.",
+      "Plant inspection by a rabbinic coordinator.",
+      "Determination of mashgiach requirement — visits, or full-time presence, depending on what is produced.",
+      "Contract, fee schedule, and certification issued.",
+      "Ongoing: scheduled and unannounced inspections, annual renewal."
+    ],
+    "timelineWeeks": { "simple": "4 to 6", "moderate": "8 to 12", "complex": "12 to 20" },
+    "timelineDrivers": [
+      "how quickly the ingredient list can be verified with upstream suppliers",
+      "whether any ingredient needs its own certification obtained first",
+      "how much equipment kashering the changeover requires",
+      "scheduling the inspection"
+    ]
+  },
+  "costDrivers": [
+    "number of facilities",
+    "number of distinct products and production lines",
+    "ingredient complexity and how many suppliers need upstream verification",
+    "mashgiach hours — periodic visits versus full-time presence on site",
+    "whether equipment kashering or line dedication is required",
+    "travel to the plant"
+  ],
+  "annualRangeUsd": {
+    "_comment": "Order-of-magnitude bands only, always delivered as a band with drivers. Never as a figure.",
+    "simple": { "low": 3000, "high": 9000, "describes": "single facility, few products, all ingredients already certified, periodic mashgiach visits" },
+    "moderate": { "low": 9000, "high": 30000, "describes": "single or dual facility, a dozen or more products, some upstream verification needed" },
+    "complex": { "low": 30000, "high": 120000, "describes": "multiple facilities, extensive product range, full-time mashgiach, or significant kashering" }
+  },
+  "departmentContact": {
+    "name": "Kehilla Certification Department",
+    "phone": "(718) 555-0140 extension 2",
+    "email": "certification@kehilla-demo.example",
+    "callbackWindow": "one business day"
+  },
+  "faq": [
+    {
+      "q": "Do we certify a single product or the whole company?",
+      "a": "Either. Many companies start with one line and expand the certification later."
+    },
+    {
+      "q": "Does the company need a full-time mashgiach?",
+      "a": "It depends entirely on what is produced. Many facilities need only periodic visits; meat, cooked foods, and some dairy operations need full-time presence."
+    },
+    {
+      "q": "Can certification be backdated to cover stock already produced?",
+      "a": "No. Certification covers production under supervision from the date it is issued."
+    }
+  ]
+}
