@@ -12,7 +12,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import config from '@config/agent.config.json';
+import config from '@config/public.config.json';
 import type { TurnView } from '@/lib/client/types';
 import { Label, Pill } from './ui';
 

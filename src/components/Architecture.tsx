@@ -9,7 +9,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import config from '@config/agent.config.json';
+import config from '@config/public.config.json';
 import { Label, formatUsd } from './ui';
 
 const DIAGRAM = `                    ┌──────────────┐

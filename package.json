@@ -14,7 +14,9 @@
     "check:models": "node scripts/check-models.mjs",
     "trace": "node scripts/trace.mjs",
     "capture": "node scripts/capture-sessions.mjs",
-    "build:demo": "node scripts/build-demo.mjs"
+    "build:demo": "node scripts/build-demo.mjs",
+    "build:config": "node scripts/build-public-config.mjs",
+    "prebuild": "node scripts/build-public-config.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.127.0",
