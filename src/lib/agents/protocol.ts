@@ -9,6 +9,7 @@
 import type { GuardrailHit } from '../guardrails';
 import type { Intent, TriageEntities } from './triage';
 import type { ToolResult } from '../tools/types';
+import type { TelemetryEvent } from '../telemetry/events';
 
 /**
  * How the client should handle text-to-speech for this turn.
@@ -132,7 +133,17 @@ export type TurnEvent =
       outputTokens: number;
     }
   | { t: 'error'; message: string; retryable: boolean }
-  | { t: 'degraded'; reason: string };
+  | { t: 'degraded'; reason: string }
+  /**
+   * The server's own telemetry log for this turn, sent at the end.
+   *
+   * The download has to be the real event stream rather than something the
+   * client reconstructs from what it happened to render, or the claim that this
+   * is the payload you would ship to an observability stack is not true. The
+   * browser appends the events only it can measure — STT finalise, TTS start,
+   * interruption — to these.
+   */
+  | { t: 'telemetry'; events: TelemetryEvent[] };
 
 /** Serialise one event as an SSE frame. */
 export function sseFrame(event: TurnEvent): string {

@@ -45,7 +45,11 @@
       "Bash(security find-internet-password *)",
       "Read(//Applications/**)",
       "Read(//Applications/Visual Studio Code.app/**)",
-      "Bash(echo \"typecheck: $?\")"
+      "Bash(echo \"typecheck: $?\")",
+      "Bash(echo \"code: $?\")",
+      "Bash(npx eslint *)",
+      "Bash(grep -v \"^$\")",
+      "Bash(echo \"lint: $?\")"
     ]
   }
 }

@@ -448,6 +448,10 @@ export async function* runTurn(input: TurnInput): AsyncGenerator<TurnEvent, Turn
     detail: { fallback, blocked_drafts: blockedDrafts.length, verifier_ran: verifierRan },
   });
 
+  // Emitted last so it includes call_end. The browser merges its own measured
+  // events into this before offering the download.
+  yield { t: 'telemetry', events: [...log.all()] };
+
   return {
     finalText,
     speak: true,

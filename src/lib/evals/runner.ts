@@ -56,7 +56,7 @@ export function caseIds(): string[] {
   return evalsConfig.cases.map((c) => c.id);
 }
 
-async function runCase(raw: RawCase, index: number): Promise<EvalCaseResult> {
+async function runCase(raw: RawCase): Promise<EvalCaseResult> {
   const started = performance.now();
   const callerMessage = raw.turns.map((t) => t.text).join(' ');
   const now = raw.pinDate ? new Date(`${raw.pinDate}T14:00:00Z`) : undefined;
@@ -173,7 +173,7 @@ export async function runSuite(options: RunOptions = {}): Promise<EvalSuiteResul
     while (true) {
       const index = cursor++;
       if (index >= selected.length) return;
-      const result = await runCase(selected[index], index);
+      const result = await runCase(selected[index]);
       results[index] = result;
       completed++;
       options.onCaseComplete?.(result, completed, selected.length);
