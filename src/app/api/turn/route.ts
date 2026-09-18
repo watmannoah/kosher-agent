@@ -19,6 +19,15 @@ import config from '@config/agent.config.json';
 import { runTurn } from '@/lib/agents/pipeline';
 import { sseFrame, type TurnEvent } from '@/lib/agents/protocol';
 import { hasApiKey } from '@/lib/agents/client';
+import {
+  checkSessionSpend,
+  checkSessionTurns,
+  checkSpendCap,
+  checkTurnRate,
+  clientKey,
+  logAttempt,
+  recordSpend,
+} from '@/lib/limits';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -33,6 +42,9 @@ interface TurnRequestBody {
   history?: unknown;
   interruptedAfter?: unknown;
   priorSessionCostUsd?: unknown;
+  /** Set by the Break It panel so the attempt joins the public log. */
+  attackId?: unknown;
+  logAttempt?: unknown;
 }
 
 /** Accept only well-formed text turns; anything else is discarded silently. */
@@ -90,6 +102,45 @@ export async function POST(request: NextRequest) {
       : `call_${Date.now().toString(36)}`;
 
   const turnId = Number.isFinite(Number(body.turnId)) ? Math.max(1, Number(body.turnId)) : 1;
+  const priorSessionCostUsd =
+    typeof body.priorSessionCostUsd === 'number' && body.priorSessionCostUsd >= 0
+      ? body.priorSessionCostUsd
+      : 0;
+
+  // --- Limits, before any model call -------------------------------------
+  // Order matters: cheap local checks first, then the counter-backed ones, so
+  // an abusive client burns as little as possible getting refused.
+  const ip = clientKey(request.headers);
+
+  const sessionTurns = checkSessionTurns(turnId);
+  if (!sessionTurns.allowed) {
+    return NextResponse.json({ error: sessionTurns.reason, message: sessionTurns.message }, { status: 429 });
+  }
+
+  const sessionSpend = await checkSessionSpend(priorSessionCostUsd);
+  if (!sessionSpend.allowed) {
+    return NextResponse.json({ error: sessionSpend.reason, message: sessionSpend.message }, { status: 429 });
+  }
+
+  const rate = await checkTurnRate(ip);
+  if (!rate.allowed) {
+    return NextResponse.json(
+      { error: rate.reason, message: rate.message },
+      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds ?? 60) } },
+    );
+  }
+
+  // The spend cap degrades to scripted mode with an honest banner rather than
+  // erroring, so the client gets a `degraded` event it can render in place.
+  const spend = await checkSpendCap();
+  if (!spend.allowed) {
+    return NextResponse.json(
+      { error: spend.reason, message: spend.message, degraded: true },
+      { status: 503 },
+    );
+  }
+
+  const isAttack = body.attackId !== undefined || body.logAttempt === true;
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
@@ -108,16 +159,38 @@ export async function POST(request: NextRequest) {
             typeof body.interruptedAfter === 'string'
               ? body.interruptedAfter.slice(0, MAX_HISTORY_CHARS)
               : undefined,
-          priorSessionCostUsd:
-            typeof body.priorSessionCostUsd === 'number' && body.priorSessionCostUsd >= 0
-              ? body.priorSessionCostUsd
-              : 0,
+          priorSessionCostUsd,
         });
 
+        const guardrails: string[] = [];
         let step = await generator.next();
         while (!step.done) {
-          send(step.value);
+          const event = step.value;
+          if (event.t === 'guardrail') guardrails.push(event.hit.id);
+          send(event);
           step = await generator.next();
+        }
+
+        const result = step.value;
+
+        // Spend is recorded after the fact rather than reserved up front. A
+        // turn can overshoot the cap by its own cost, which is fractions of a
+        // cent — worth it to avoid estimating tokens before generating them.
+        await recordSpend(result.usage.costUsd);
+
+        if (isAttack) {
+          await logAttempt({
+            at: new Date().toISOString(),
+            attackId: typeof body.attackId === 'string' ? body.attackId : null,
+            text,
+            outcome: result.fallback
+              ? 'safe deflection'
+              : result.blockedDrafts.length > 0
+                ? `blocked then corrected (${result.blockedDrafts.length})`
+                : 'held on the first draft',
+            guardrails,
+            blocked: result.blockedDrafts.length > 0,
+          });
         }
       } catch (err) {
         // The caller is mid-conversation; an unhandled throw must still arrive

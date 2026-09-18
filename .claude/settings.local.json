@@ -44,7 +44,8 @@
       "Bash(curl -sv --max-time 25 https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\")",
       "Bash(security find-internet-password *)",
       "Read(//Applications/**)",
-      "Read(//Applications/Visual Studio Code.app/**)"
+      "Read(//Applications/Visual Studio Code.app/**)",
+      "Bash(echo \"typecheck: $?\")"
     ]
   }
 }
