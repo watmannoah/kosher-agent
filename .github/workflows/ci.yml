@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+# A second push while a run is in flight cancels the first. Eval runs cost
+# money, so paying for a superseded commit's suite is waste.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Free and fast: types, lint, unit tests, production build. Runs on every
+  # push regardless of whether the API secret is available, so a fork or a
+  # Dependabot PR still gets meaningful signal.
+  checks:
+    name: Types, lint, unit tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+        env:
+          # The build must not need real credentials. If it does, something is
+          # reading the key at module scope instead of per request.
+          ANTHROPIC_API_KEY: ''
+
+  # Costs money, so it is gated on the secret existing. A fork without the
+  # secret skips it rather than failing red for a reason the author cannot fix.
+  evals:
+    name: Eval suite (real models)
+    runs-on: ubuntu-latest
+    needs: checks
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check for the API key
+        id: secret
+        run: |
+          if [ -n "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::ANTHROPIC_API_KEY is not set, so the eval suite was skipped. Add it under Settings → Secrets and variables → Actions."
+          fi
+
+      - name: Run the eval suite
+        if: steps.secret.outputs.present == 'true'
+        run: npm run evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Upload the report
+        # Uploaded on failure too — that is when it is worth reading.
+        if: always() && steps.secret.outputs.present == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: eval-reports/
+          if-no-files-found: ignore
+          retention-days: 30

@@ -1,0 +1,6 @@
+{
+  "_notice": "Placeholder. Run `npm run capture -- --url <deployed-url> --passcode <passcode>` against a live deployment to populate this with real traces, then commit the result. The recorded-calls panel reads this file and shows an honest empty state while sessions is empty — it never shows invented data.",
+  "capturedAt": null,
+  "capturedFrom": null,
+  "sessions": []
+}

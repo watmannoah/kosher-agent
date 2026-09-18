@@ -17,6 +17,7 @@ import { LatencyStrip } from '@/components/LatencyStrip';
 import { BreakIt } from '@/components/BreakIt';
 import { EvalRunner } from '@/components/EvalRunner';
 import { NormalisePanel } from '@/components/NormalisePanel';
+import { RecordedCalls } from '@/components/RecordedCalls';
 import { Architecture } from '@/components/Architecture';
 import { Section } from '@/components/ui';
 
@@ -103,6 +104,15 @@ export default function Page() {
 
       <Section
         index="05"
+        id="recorded"
+        title="Recorded calls"
+        blurb="Four sessions captured from real runs, replayed at their original pacing with annotations that fire from the events that actually occurred."
+      >
+        <RecordedCalls />
+      </Section>
+
+      <Section
+        index="06"
         id="architecture"
         title="Architecture and cost"
         blurb="Why supervisor-and-specialists rather than one prompt with ten tools, and what each turn actually costs."
