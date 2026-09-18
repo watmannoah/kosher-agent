@@ -30,7 +30,10 @@
       "Bash(npm install *)",
       "Bash(node -p \"const p=require\\('./package.json'\\);JSON.stringify\\({...p.dependencies,...p.devDependencies},null,2\\)\")",
       "Bash(git add *)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(npx vitest *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"typecheck exit: $?\")"
     ]
   }
 }
