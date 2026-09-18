@@ -12,7 +12,6 @@
 import { describe, expect, it } from 'vitest';
 import fullConfig from '@config/agent.config.json';
 import publicConfig from '@config/public.config.json';
-// @ts-expect-error — plain .mjs script, no types
 import { derivePublicConfig } from '../scripts/build-public-config.mjs';
 
 describe('public.config.json', () => {
