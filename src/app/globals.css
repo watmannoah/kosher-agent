@@ -1,26 +1,87 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Dark instrument panel. One accent colour, reserved for live states only —
+ * a mic that is actually listening, a tool that is actually running. Using it
+ * anywhere else would spend the only signal the palette has.
+ *
+ * System font stacks rather than a webfont: the recipient opens this from an
+ * email on a phone, and a font download is dead weight on first paint. The
+ * content is the impressive part.
+ */
+
+@theme {
+  --color-ink: #0a0c0e;
+  --color-slate-panel: #12161a;
+  --color-slate-raised: #1a1f25;
+  --color-hairline: #262d35;
+  --color-hairline-bright: #38424d;
+
+  --color-bone: #e6e9ec;
+  --color-muted: #8b96a2;
+  --color-faint: #5c6673;
+
+  /* The one accent. Live states only. */
+  --color-live: #4ade80;
+  --color-live-dim: #14432a;
+
+  /* Status, used sparingly and never decoratively. */
+  --color-warn: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #60a5fa;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, 'Cascadia Mono', 'Roboto Mono',
+    Consolas, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  /* Stop iOS Safari inflating text in landscape. */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Telemetry is monospace throughout — it is data, and it should read as data. */
+.telemetry {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hairline rules do the structural work instead of cards and shadows. */
+.hairline {
+  border-color: var(--color-hairline);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Thin scrollbars in the trace rail, which is dense and scrolls a lot. */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline-bright) transparent;
+}
+.thin-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-hairline-bright);
+  border-radius: 3px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }

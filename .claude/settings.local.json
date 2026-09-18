@@ -33,7 +33,15 @@
       "Bash(git commit -q -m ' *)",
       "Bash(npx vitest *)",
       "Bash(npx tsc *)",
-      "Bash(echo \"typecheck exit: $?\")"
+      "Bash(echo \"typecheck exit: $?\")",
+      "Bash(NODE_USE_ENV_PROXY=1 node -e ' *)",
+      "Bash(unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy NO_PROXY no_proxy)",
+      "Bash(node -e \"require\\('dns'\\).lookup\\('api.anthropic.com',\\(e,a\\)=>console.log\\('dns:', e?e.code:a\\)\\)\")",
+      "Bash(curl -s -o /dev/null -w \"status %{http_code}\\\\n\" --max-time 20 --noproxy '*' https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\" -H \"x-api-key: invalid\")",
+      "Bash(curl -s -x http://srt.dG9vbHVfMDFZR0JaWTd5ZUJIeEtRdjdZVGlFNWky:0caf33fe22c0cc7d319438b3c42909ab@localhost:63695 -o /dev/null -w 'status %{http_code}\\\\n' --max-time 25 https://api.anthropic.com/v1/models -H 'anthropic-version: 2023-06-01' -H 'x-api-key: invalid')",
+      "Bash(curl -s -o /dev/null -w \"status %{http_code}\\\\n\" --max-time 25 https://registry.npmjs.org/next)",
+      "Bash(curl -s -o /dev/null -w \"status %{http_code}\\\\n\" --max-time 25 https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\" -H \"x-api-key: invalid\")",
+      "Bash(curl -sv --max-time 25 https://api.anthropic.com/v1/models -H \"anthropic-version: 2023-06-01\")"
     ]
   }
 }
