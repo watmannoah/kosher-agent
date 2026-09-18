@@ -10,11 +10,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function GatePage() {
   const router = useRouter();
-  const params = useSearchParams();
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -34,7 +33,7 @@ export default function GatePage() {
       const json = (await res.json()) as { ok?: boolean; message?: string };
 
       if (json.ok) {
-        const next = params.get('next');
+        const next = new URLSearchParams(window.location.search).get('next');
         // Only same-origin paths, so a crafted ?next= cannot bounce someone
         // off-site after authenticating.
         router.push(next && next.startsWith('/') && !next.startsWith('//') ? next : '/');
